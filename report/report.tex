@@ -1,0 +1,79 @@
+\documentclass[a4paper,9pt]{IEEEtran}
+
+%% Language and font encodings
+\usepackage[english,spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{amsmath, amsthm, amssymb, amsfonts} 
+\usepackage[mathscr]{eucal}
+\usepackage{ulem} % subrayar, tachar
+\usepackage{multirow, array} % para las tablas
+\usepackage{float} % para tablas, usar [H]
+\usepackage{graphicx} % graficos
+\usepackage{longtable} 
+\usepackage{hyperref} % Agregar enlaces \href
+\usepackage{pdflscape} %hoja en horizontal
+\usepackage{listings} %agregar codigo al documento
+\usepackage{amsmath} %multiline, matrix
+
+
+%% Sets page size and margins
+% Margenes segun formato IEEE
+\usepackage[a4paper,top=1.78cm,bottom=1.78cm,left=1.65cm,right=1.65cm,marginparwidth= 1.5cm]{geometry}
+
+\title{\Huge{Title}}
+\author{
+\normalsize{
+    \hspace{0.2cm} @unal.edu.co\\
+    \hspace{0.2cm} @unal.edu.co\\
+    Guiselle Tatiana Zambrano Penagos \hspace{0.2cm} gtzambranop@unal.edu.co\\
+    Universidad Nacional de Colombia\\
+    \normalsize{Bogotá, Colombia, Abril 2 de 2020}
+    \vspace{-0.5cm}
+}
+}
+
+
+\begin{document}
+\twocolumn[
+\begin{@twocolumnfalse}
+\vspace{-0.5cm}
+\maketitle
+
+\begin{abstract}
+\footnotesize{
+hola \\
+
+\textbf{Palabras clave:} hola.
+}
+\end{abstract}
+
+\selectlanguage{english}
+\begin{abstract}
+\footnotesize{
+Hello\\
+
+\textbf{Keywords:} Hello.
+}
+\end{abstract}
+\end{@twocolumnfalse}
+]
+
+\selectlanguage{spanish}
+\small
+
+\section{NameSection}
+
+
+
+
+\begin{thebibliography}{50}
+\scriptsize{
+
+\bibitem{00} Description \url{https://github.com}
+
+}
+\end{thebibliography}{}
+
+\end{document}
