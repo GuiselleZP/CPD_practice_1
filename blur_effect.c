@@ -14,8 +14,8 @@ int main(void) {
         exit(1);
     }
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
-   
-   
+
+
     size_t img_size  = width * height * channels;
     int s = 0;
 
@@ -59,3 +59,22 @@ int main(void) {
 
 }
 //gcc -Wall -pedantic blur_effect.c -o blur -lm
+
+//Algoritmo 1
+// source channel, target channel, width, height, radius
+function gaussBlur_1 (int* scl,int* tcl,int w,int h,int r) {
+    double rs = Math.ceil(r * 2.57);     // significant radius
+    for(int i = 0; i < h; i++)
+        for(int j = 0; j < w; j++) {
+            int val = 0, wsum = 0;
+            for(int iy = i-rs; iy < i + rs + 1; iy++)
+                for(int ix = j-rs; ix < j + rs + 1; ix++) {
+                    int x = Math.min(w - 1, Math.max(0, ix));
+                    int y = Math.min(h - 1, Math.max(0, iy));
+                    int dsq = (ix - j)*(ix - j)+(iy - i)*(iy - i);
+                    int wght = Math.exp( -dsq / (2*r*r) ) / (Math.PI*2*r*r);
+                    val += scl[y * w + x] * wght;  wsum += wght;
+                }
+            tcl[i * w + j] = Math.round(val / wsum);
+        }
+}
