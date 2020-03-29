@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include <stdbool.h>
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -72,6 +73,8 @@ void imageCreate(Image *img, int width, int height, int channels, bool zero){
 void imageLoad(Image *img, const char *fname){
 	img->data = stbi_load(fname, &img->width, &img->height, &img->channels, 0);
 	ON_ERROR_EXIT(img->data == NULL, "Error in stbi_load");
+	img->size = img->width * img->height * img->channels;
+	img->allocation_ = STB_ALLOCATED;
 }
 
 void imageSave(const Image *img, const char *fname){
@@ -89,7 +92,7 @@ void imageToGray(const Image *orig, Image *gray){
     int channels = orig->channels == 4 ? 2 : 1;
     imageCreate(gray, orig->width, orig->height, channels, false);
     ON_ERROR_EXIT(gray->data == NULL, "Error in creating the image");
-
+ 
     for(unsigned char *p = orig->data, *pg = gray->data; p != orig->data + orig->size; p += orig->channels, pg += gray->channels) {
         *pg = (uint8_t)((*p + *(p + 1) + *(p + 2))/3.0);
         if(orig->channels == 4) {
@@ -99,18 +102,31 @@ void imageToGray(const Image *orig, Image *gray){
 }
 
 int main(int argc, char *argv[]){
-	if(argc < 3){
+	if(argc < 5){
 		printf("./blr nameImageImput nameImageOutput\n");
 		return 0;
 	}
 
+	char nameInp[32] = "",
+		nameOut[32] = "";
+
+	int kernel = atoi(argv[3]),
+		thread = atoi(argv[4]);
+
+	strcpy(nameInp, "input_images/");
+	strcat(nameInp, argv[1]);
+	strcpy(nameOut, "output_images/");
+	strcat(nameOut, argv[2]);
+
 	Image img, out;
-	imageLoad(&img, argv[1]);
+	imageLoad(&img, nameInp);
 	ON_ERROR_EXIT(img.data == NULL, "Error in loading the image");
 
 	imageToGray(&img, &out);
-	imageSave(&out, argv[2]);
+	imageSave(&out, nameOut);
 
 	imageFree(&img);
 	imageFree(&out);
+
+	return 0;
 }
