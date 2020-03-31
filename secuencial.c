@@ -1,25 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <string.h>
-#include <pthread.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image/stb_image_write.h"
-
-#define THREADS 1
-//int* scl,int* tcl,int w,int h,int r
-struct canales
-{
-    int* scl;
-    int* tcl;
-    int w;
-    int h;
-    int r;
-};
-struct canales *canal;	
 
 int max(int num1, int num2){
     return (num1 > num2 ) ? num1 : num2;
@@ -47,91 +33,44 @@ void boxesForGauss(int sigma, int n, double* sizes) { // standard deviation, num
     } 
 }
 
-// void boxBlurT_3 (int* scl,int* tcl,int w,int h,int r) {
-void boxBlurT_3(int threadId){
-    int initIterationH, endIterationH;
-    int h = canal -> h;
-    int w = canal -> w;
-    int r = canal -> r;
-    initIterationH = (h / THREADS) * threadId;
-    if(threadId == THREADS - 1){
-        endIterationH = h;
-    }else{
-        endIterationH = (h / THREADS)*(threadId + 1);
-    }
-    //printf("BlurT ID: %i init: %i end %i    ", threadId, initIterationH, endIterationH);
-    for(int i=initIterationH; i<endIterationH; i++)
+void boxBlurT_3 (int* scl,int* tcl,int w,int h,int r) {
+    for(int i=0; i<h; i++)
         for(int j=0; j<w; j++) {
             int val = 0;
             for(int iy=i-r; iy<i+r+1; iy++) {
                 int y = min(h-1, max(0, iy));
-                val += *(canal -> scl+(y*w+j));
+                val += *(scl+(y*w+j));
             }
-            *(canal -> tcl+(i*w+j)) = val/(r+r+1);
+            *(tcl+(i*w+j)) = val/(r+r+1);
         }
 }
 
-//void boxBlurH_3 (int* scl,int* tcl,int w,int h,int r) {
-void boxBlurH_3(int threadId){
-    int initIterationW, endIterationW;
-    int h = canal -> h;
-    int w = canal -> w;
-    int r = canal -> r;
-    initIterationW = (w / THREADS) * threadId;
-    if(threadId == THREADS - 1){
-        endIterationW = w;
-    }else{
-        endIterationW = (w / THREADS)*(threadId + 1);
-    }
-    for(int i = 0; i < h; i++)
-        for(int j = initIterationW; j < endIterationW; j++) {
+void boxBlurH_3 (int* scl,int* tcl,int w,int h,int r) {
+    for(int i=0; i<h; i++)
+        for(int j=0; j<w; j++)  {
             int val = 0;
-            for(int ix = j - r; ix < j + r + 1; ix++) {
+            for(int ix=j-r; ix<j+r+1; ix++) {
                 int x = min(w-1, max(0, ix));
-                val += *(canal -> tcl + (i*w+x));
+                val += *(scl+(i*w+x));
             }
-            *(canal -> scl + (i*w+j)) = val/(r+r+1);
+            *(tcl+(i*w+j)) = val/(r+r+1);
         }
 } 
-
-void *parallel(void *arg){
-    int threadId = *(int *)arg;
-
-    boxBlurH_3(threadId);
-    boxBlurT_3(threadId);
-}
 
 void boxBlur_3 (int* scl,int* tcl,int w,int h,int r) {
     for(int i=0; i<(w*h); i++) {
         int aux = *(scl+i);
         *(tcl+i) = aux;
     }
-    int threadId[THREADS], i, *retval;
-    pthread_t thread[THREADS];
-    canal = malloc(sizeof(struct canales));
-    canal -> scl = scl;
-    canal -> tcl = tcl;
-    canal -> w = w;
-    canal -> h = h;
-    canal -> r = r;
-
-    for (i=0; i<THREADS; i++){
-        threadId[i] = i;
-        pthread_create(&thread[i], NULL, parallel, &threadId[i]);
-    }
-
-	/* Join the threads - barrier*/
-	for (i=0; i<THREADS; i++)
-		pthread_join(thread[i], (void **)&retval);
-
-    // boxBlurH_3(tcl, scl, w, h, r);
-    // boxBlurT_3(scl, tcl, w, h, r);
+    boxBlurH_3(tcl, scl, w, h, r);
+    boxBlurT_3(scl, tcl, w, h, r);
 }
 
 
 void  gaussBlur_3 (int* scl,int* tcl,int w,int h,int r) {
     double  *bxs = (double*)malloc(sizeof(double)*3);
     boxesForGauss(r,3,bxs);
+
     boxBlur_3 (scl, tcl, w, h, (int)((*(bxs)-1)/2));
     boxBlur_3 (tcl, scl, w, h, (int)((*(bxs+1)-1)/2));
     boxBlur_3 (scl, tcl, w, h, (int)((*(bxs+2)-1)/2));
@@ -140,7 +79,7 @@ void  gaussBlur_3 (int* scl,int* tcl,int w,int h,int r) {
 int main(void) {
 
     int width, height, channels;
-    unsigned char *img = stbi_load("lobo4k.jpg", &width, &height, &channels, 0); //// cero para cargar todos los canales
+    unsigned char *img = stbi_load("lobo1080.jpg", &width, &height, &channels, 0); //// cero para cargar todos los canales
     if(img == NULL) {
         printf("Error in loading the image\n");
         exit(1);
@@ -153,7 +92,6 @@ int main(void) {
     int  *r = (int*)malloc(sizeof(int)*(img_size/3));
     int  *g = (int*)malloc(sizeof(int)*(img_size/3));
     int  *b = (int*)malloc(sizeof(int)*(img_size/3));
-    
     int i = 0;
     for(unsigned char *p = img; p != img + img_size; p += channels,i++) {
         *(r+i) = (uint8_t) *p ;
@@ -163,27 +101,22 @@ int main(void) {
 
     int  *r_target = (int*)malloc(sizeof(int)*(img_size/3));
     int  *g_target = (int*)malloc(sizeof(int)*(img_size/3));
-    int  *b_target = (int*)malloc(sizeof(int)*(img_size/3));  
+    int  *b_target = (int*)malloc(sizeof(int)*(img_size/3));
     int kernel = 3;
-    
     gaussBlur_3(r,r_target,width,height,kernel);
     gaussBlur_3(g,g_target,width,height,kernel);
     gaussBlur_3(b,b_target,width,height,kernel);
 
+    unsigned char new_image[img_size];
     int j =0;
     for(int i = 0; i <img_size/3; i++ ){
-        img[j] =  *(r_target+i);
-        img[j+1] =  *(g_target+i);
-        img[j+2] =  *(b_target+i);
+        new_image[j] =  *(r_target+i);
+        new_image[j+1] =  *(g_target+i);
+        new_image[j+2] =  *(b_target+i);
         j+=3;
     }
 
-    stbi_write_jpg("loboblur.jpg", width, height, channels, img, 100);
-    free(r_target);
-	free(g_target);
-	free(b_target);
-	free(r);
-	free(g);
-	free(b);
+    stbi_write_jpg("loboblur2.jpg", width, height, channels, new_image, 100);
+
 }
-//gcc -pthread -Wall -pedantic blur_effect.c -o blur -lm
+//gcc -Wall -pedantic secuencial.c -o secuencial -lm
