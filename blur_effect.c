@@ -50,15 +50,9 @@ int min(int num1, int num2) {
     return (num1 > num2 ) ? num2 : num1;
 }
 
-static inline bool str_ends_in(const char *str, const char *ends){
-	char *pos = strrchr(str, '.');
-	return !strcmp(pos, ends);
-}
-
 void imageFree(Image *img){
 	if(img->allocation_ != NO_ALLOCATION && img->data != NULL){
 		int i;
-
 		stbi_image_free(img->data);
 		img->data = NULL;
 		img->width = 0;
@@ -74,6 +68,7 @@ void imageFree(Image *img){
 }
 
 void imageLoad(Image *img, const char *fname, int kernel){
+	unsigned char *p;
 	int i = 0;
 	
 	img->data = stbi_load(fname, &img->width, &img->height, &img->channels, 0);
@@ -88,7 +83,7 @@ void imageLoad(Image *img, const char *fname, int kernel){
 		img->targetsRGB[i] = (int*)malloc(sizeof(int)*(img->size/CHANNELS));
 	}
 
-	for(unsigned char *p = img->data; p != img->data + img->size; p += img->channels, i++){
+	for(p = img->data; p != img->data + img->size; p += img->channels, i++){
 		*(img->rgb[0] + i) = (uint8_t) *p;
 		*(img->rgb[1] + i) = (uint8_t) *(p + 1);
 		*(img->rgb[2] + i) = (uint8_t) *(p + 2);
@@ -102,48 +97,35 @@ void imageSave(const Image *img, const char *fname){
 		img->data[j + 1] = *(img->rgb[1] + i);
 		img->data[j + 2] = *(img->rgb[2] + i);
 	}
-
-	if(str_ends_in(fname, ".jpg")||str_ends_in(fname, ".JPG")||str_ends_in(fname, ".jpeg")||str_ends_in(fname, ".jpeg")){
-		stbi_write_jpg(fname, img->width, img->height, img->channels, img->data, 100);
-	}else if(str_ends_in(fname, ".png")||str_ends_in(fname, ".PNG")){
-		stbi_write_png(fname, img->width, img->height, img->channels, img->data, img->width * img->channels);
-	}else{
-		ON_ERROR_EXIT(false, "Invalid format");
-	}
+	stbi_write_jpg(fname, img->width, img->height, img->channels, img->data, 100);
 }
 
-
 void boxesForGauss(double *sizes){
-	int k = img.kernel,
-		n = CHANNELS,
-		i;
+	int k = img.kernel,	n = CHANNELS,i;
+
 	double wIdeal = sqrt((12 * k * k / n) + 1);
 	double wl = floor(wIdeal);
-	
 	if(fmod(wl, 2.0) == 0.0)
 		wl--;
 	double wu = wl + 2;
 	double mIdeal = (12*k*k - n*wl*wl - 4*n*wl - 3*n) / (-4*wl -4);
 	double m = round(mIdeal);
-
-	for(i = 0; i < n; i++){
+	for(i = 0; i < n; i++)
 		*(sizes + i) = (i < m ? wl : wu);
-	}
 }
 
 void boxBlurT(int *scl, int *tcl, int r, int threadId){
-	int initIteration,
-		endIteration,
-		i, j, k, y,
-		w = img.width,
-		h = img.height;
+	int initIteration,endIteration,
+		w = img.width,h = img.height,
+		i, j, k, y;
+
 	initIteration = (h / THREADS) * threadId;
-	if(threadId == (THREADS - 1)){
+	if(threadId == (THREADS - 1))
 		endIteration = h;
-	}else{
+	else
 		endIteration = (h / THREADS)*(threadId + 1);
-	}
-	for(i = initIteration; i < endIteration; i++){
+	
+	for(i = initIteration; i < endIteration; i++)
 		for(j = 0; j < w; j++){
 			int val = 0;
 			for(k = (i - r); k < (i + r + 1); k++){
@@ -152,24 +134,20 @@ void boxBlurT(int *scl, int *tcl, int r, int threadId){
 			}
 			*(tcl + (i * w + j)) = val / (r+r+1);
 		}
-	}
 }
 
 void boxBlurH(int *scl, int *tcl, int r, int threadId){
-	int initIteration,
-		endIteration,
-		i, j, k, x,
-		w = img.width,
-		h = img.height;
+	int initIteration, endIteration,
+		w = img.width, h = img.height,
+		i, j, k, x;
 
 	initIteration = (w / THREADS) * threadId;
-	if(threadId == (THREADS - 1)){
+	if(threadId == (THREADS - 1))
 		endIteration = w;
-	}else{
+	else
 		endIteration = (w / THREADS)*(threadId + 1);
-	}
-	
-	for(i = 0; i < h; i++){
+		
+	for(i = 0; i < h; i++)
 		for(j = initIteration; j < endIteration; j++){
 			int val = 0;
 			for(k = (j - r); k < (j + r + 1); k ++){
@@ -178,13 +156,10 @@ void boxBlurH(int *scl, int *tcl, int r, int threadId){
 			}
 			*(tcl + (i * w + j)) = val/(r+r+1);
 		}
-	}
 }
 
 void boxBlur(int *scl, int *tcl, int r,int threadId){
-	int w = img.width,
-		h = img.height,
-		i;
+	int w = img.width, h = img.height, i;
 	for(i = 0; i < (w*h); i++){
 		int aux = *(scl + i);
 		*(tcl + i) = aux;
@@ -196,29 +171,23 @@ void boxBlur(int *scl, int *tcl, int r,int threadId){
 void gaussBlur_3(int *scl, int *tcl, int threadId){
 	double *bxs = (double*)malloc(sizeof(double)*CHANNELS);
 	boxesForGauss(bxs);
-
 	boxBlur(scl, tcl, (int)((*(bxs)-1)/2), threadId);
 	boxBlur(tcl, scl, (int)((*(bxs+1)-1)/2), threadId);
 	boxBlur(scl, tcl, (int)((*(bxs+2)-1)/2), threadId);
 }
 
-
 void parallel(void *arg){
 	const Image *orig = &img;
-	int threadId = *(int *)arg,
-		i;
+	int threadId = *(int *)arg,	i;
 
     ON_ERROR_EXIT(!(orig->allocation_ != NO_ALLOCATION && orig->channels >= 3), 
 			"The input image must have at least 3 channels.");
-
 	for(i = 0; i < CHANNELS; i++)
 		gaussBlur_3(img.rgb[i], img.targetsRGB[i], threadId);
 }
 
 int main(int argc, char *argv[]){
-
 	ON_ERROR_EXIT(argc < 5, "time ./blr imgInp.jpg imgOut.jpg kernel threads");
-
 	THREADS = atoi(argv[4]);
 	int kernel = atoi(argv[3]),
 		threadId[THREADS],
@@ -226,12 +195,10 @@ int main(int argc, char *argv[]){
 	pthread_t thread[THREADS];
 
 	imageLoad(&img, argv[1], kernel);
-	
 	for(i = 0; i < THREADS; i++){
 		threadId[i] = i;
 		pthread_create(&thread[i], NULL, (void *)parallel, &threadId[i]);
 	}
-
 	for(i = 0; i < THREADS; i++)
 		pthread_join(thread[i], NULL);
 
