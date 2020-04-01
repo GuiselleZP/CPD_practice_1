@@ -216,10 +216,8 @@ void parallel(void *arg){
 }
 
 int main(int argc, char *argv[]){
-	if(argc < 5){
-		printf("./blr nameImageImput nameImageOutput\n");
-		return 0;
-	}
+
+	ON_ERROR_EXIT(argc < 5, "time ./blr imgInp.jpg imgOut.jpg kernel threads");
 
 	THREADS = atoi(argv[4]);
 	int kernel = atoi(argv[3]),
@@ -241,4 +239,4 @@ int main(int argc, char *argv[]){
 	imageFree(&img);
 	return 0;
 }
-// gcc -std=c17 -Wall blur_effect.c -o blur -lm -lpthread
+// gcc -Wall blur_effect.c -o blur -lpthread -lm
