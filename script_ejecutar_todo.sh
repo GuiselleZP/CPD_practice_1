@@ -65,7 +65,7 @@ done
 ##################################################################################################
 
 
-#Resultados del programa en paralelizado para kernel entre 3 y 15
+#Resultados del programa paralelizado para kernel entre 3 y 15
 echo "" >> resultados.txt
 echo "**********************************" >> resultados.txt
 echo "----------------------------------" >> resultados.txt
