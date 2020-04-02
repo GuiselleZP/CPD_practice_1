@@ -1,0 +1,828 @@
+
+**********************************
+----------------------------------
+       Ejecucion secuencial       
+----------------------------------
+**********************************
+----------------------------------
+         imagen 720p              
+----------------------------------
+Con un kernel de 3
+
+real	0m0,410s
+user	0m0,406s
+sys	0m0,004s
+
+Con un kernel de 5
+
+real	0m0,587s
+user	0m0,567s
+sys	0m0,020s
+
+Con un kernel de 7
+
+real	0m0,793s
+user	0m0,791s
+sys	0m0,000s
+
+Con un kernel de 9
+
+real	0m0,976s
+user	0m0,975s
+sys	0m0,000s
+
+Con un kernel de 11
+
+real	0m1,211s
+user	0m1,203s
+sys	0m0,008s
+
+Con un kernel de 13
+
+real	0m1,369s
+user	0m1,357s
+sys	0m0,012s
+
+Con un kernel de 15
+
+real	0m1,522s
+user	0m1,514s
+sys	0m0,008s
+
+----------------------------------
+          imagen 1080p            
+----------------------------------
+Con un kernel de 3
+
+real	0m0,662s
+user	0m0,654s
+sys	0m0,008s
+
+Con un kernel de 5
+
+real	0m1,015s
+user	0m1,015s
+sys	0m0,000s
+
+Con un kernel de 7
+
+real	0m1,363s
+user	0m1,363s
+sys	0m0,000s
+
+Con un kernel de 9
+
+real	0m1,666s
+user	0m1,662s
+sys	0m0,004s
+
+Con un kernel de 11
+
+real	0m2,081s
+user	0m2,081s
+sys	0m0,000s
+
+Con un kernel de 13
+
+real	0m2,388s
+user	0m2,379s
+sys	0m0,008s
+
+Con un kernel de 15
+
+real	0m2,722s
+user	0m2,718s
+sys	0m0,004s
+
+----------------------------------
+          imagen 4k               
+----------------------------------
+Con un kernel de 3
+
+real	0m9,415s
+user	0m9,330s
+sys	0m0,084s
+
+Con un kernel de 5
+
+real	0m13,823s
+user	0m13,722s
+sys	0m0,100s
+
+Con un kernel de 7
+
+real	0m18,292s
+user	0m18,227s
+sys	0m0,064s
+
+Con un kernel de 9
+
+real	0m22,803s
+user	0m22,713s
+sys	0m0,088s
+
+Con un kernel de 11
+
+real	0m28,552s
+user	0m28,475s
+sys	0m0,076s
+
+Con un kernel de 13
+
+real	0m33,140s
+user	0m33,078s
+sys	0m0,060s
+
+Con un kernel de 15
+
+real	0m37,674s
+user	0m37,572s
+sys	0m0,100s
+
+
+**********************************
+----------------------------------
+      Ejecicion en paralelo       
+----------------------------------
+**********************************
+----------------------------------
+            imagen 720p           
+----------------------------------
+Con un numero de hilos de 2
+Con un kernel de 3
+
+real	0m0,283s
+user	0m0,448s
+sys	0m0,004s
+
+
+Con un numero de hilos de 4
+Con un kernel de 3
+
+real	0m0,257s
+user	0m0,693s
+sys	0m0,012s
+
+
+Con un numero de hilos de 8
+Con un kernel de 3
+
+real	0m0,274s
+user	0m0,750s
+sys	0m0,012s
+
+
+Con un numero de hilos de 16
+Con un kernel de 3
+
+real	0m0,304s
+user	0m0,907s
+sys	0m0,000s
+
+
+Con un numero de hilos de 2
+Con un kernel de 5
+
+real	0m0,396s
+user	0m0,692s
+sys	0m0,000s
+
+
+Con un numero de hilos de 4
+Con un kernel de 5
+
+real	0m0,348s
+user	0m1,064s
+sys	0m0,020s
+
+
+Con un numero de hilos de 8
+Con un kernel de 5
+
+real	0m0,358s
+user	0m1,155s
+sys	0m0,000s
+
+
+Con un numero de hilos de 16
+Con un kernel de 5
+
+real	0m0,392s
+user	0m1,257s
+sys	0m0,012s
+
+
+Con un numero de hilos de 2
+Con un kernel de 7
+
+real	0m0,477s
+user	0m0,860s
+sys	0m0,004s
+
+
+Con un numero de hilos de 4
+Con un kernel de 7
+
+real	0m0,434s
+user	0m1,459s
+sys	0m0,008s
+
+
+Con un numero de hilos de 8
+Con un kernel de 7
+
+real	0m0,460s
+user	0m1,511s
+sys	0m0,000s
+
+
+Con un numero de hilos de 16
+Con un kernel de 7
+
+real	0m0,487s
+user	0m1,652s
+sys	0m0,004s
+
+
+Con un numero de hilos de 2
+Con un kernel de 9
+
+real	0m0,625s
+user	0m1,167s
+sys	0m0,004s
+
+
+Con un numero de hilos de 4
+Con un kernel de 9
+
+real	0m0,521s
+user	0m1,823s
+sys	0m0,004s
+
+
+Con un numero de hilos de 8
+Con un kernel de 9
+
+real	0m0,551s
+user	0m1,895s
+sys	0m0,000s
+
+
+Con un numero de hilos de 16
+Con un kernel de 9
+
+real	0m0,577s
+user	0m2,005s
+sys	0m0,004s
+
+
+Con un numero de hilos de 2
+Con un kernel de 11
+
+real	0m0,713s
+user	0m1,324s
+sys	0m0,008s
+
+
+Con un numero de hilos de 4
+Con un kernel de 11
+
+real	0m0,654s
+user	0m2,244s
+sys	0m0,000s
+
+
+Con un numero de hilos de 8
+Con un kernel de 11
+
+real	0m0,650s
+user	0m2,313s
+sys	0m0,016s
+
+
+Con un numero de hilos de 16
+Con un kernel de 11
+
+real	0m0,702s
+user	0m2,443s
+sys	0m0,008s
+
+
+Con un numero de hilos de 2
+Con un kernel de 13
+
+real	0m0,798s
+user	0m1,502s
+sys	0m0,008s
+
+
+Con un numero de hilos de 4
+Con un kernel de 13
+
+real	0m0,740s
+user	0m2,621s
+sys	0m0,012s
+
+
+Con un numero de hilos de 8
+Con un kernel de 13
+
+real	0m0,754s
+user	0m2,718s
+sys	0m0,008s
+
+
+Con un numero de hilos de 16
+Con un kernel de 13
+
+real	0m0,807s
+user	0m2,848s
+sys	0m0,000s
+
+
+Con un numero de hilos de 2
+Con un kernel de 15
+
+real	0m0,921s
+user	0m1,758s
+sys	0m0,000s
+
+
+Con un numero de hilos de 4
+Con un kernel de 15
+
+real	0m0,842s
+user	0m3,044s
+sys	0m0,008s
+
+
+Con un numero de hilos de 8
+Con un kernel de 15
+
+real	0m0,843s
+user	0m3,099s
+sys	0m0,000s
+
+
+Con un numero de hilos de 16
+Con un kernel de 15
+
+real	0m0,891s
+user	0m3,251s
+sys	0m0,000s
+
+
+----------------------------------
+          imagen 1080p            
+----------------------------------
+Con un numero de hilos de 2
+Con un kernel de 3
+
+real	0m0,461s
+user	0m0,788s
+sys	0m0,012s
+
+
+Con un numero de hilos de 4
+Con un kernel de 3
+
+real	0m0,418s
+user	0m1,262s
+sys	0m0,004s
+
+
+Con un numero de hilos de 8
+Con un kernel de 3
+
+real	0m0,454s
+user	0m1,387s
+sys	0m0,016s
+
+
+Con un numero de hilos de 16
+Con un kernel de 3
+
+real	0m0,511s
+user	0m1,628s
+sys	0m0,016s
+
+
+Con un numero de hilos de 2
+Con un kernel de 5
+
+real	0m0,638s
+user	0m1,144s
+sys	0m0,004s
+
+
+Con un numero de hilos de 4
+Con un kernel de 5
+
+real	0m0,603s
+user	0m1,963s
+sys	0m0,008s
+
+
+Con un numero de hilos de 8
+Con un kernel de 5
+
+real	0m0,627s
+user	0m2,120s
+sys	0m0,008s
+
+
+Con un numero de hilos de 16
+Con un kernel de 5
+
+real	0m0,696s
+user	0m2,333s
+sys	0m0,008s
+
+
+Con un numero de hilos de 2
+Con un kernel de 7
+
+real	0m0,830s
+user	0m1,535s
+sys	0m0,004s
+
+
+Con un numero de hilos de 4
+Con un kernel de 7
+
+real	0m0,801s
+user	0m2,725s
+sys	0m0,008s
+
+
+Con un numero de hilos de 8
+Con un kernel de 7
+
+real	0m0,823s
+user	0m2,863s
+sys	0m0,016s
+
+
+Con un numero de hilos de 16
+Con un kernel de 7
+
+real	0m0,888s
+user	0m3,118s
+sys	0m0,012s
+
+
+Con un numero de hilos de 2
+Con un kernel de 9
+
+real	0m1,015s
+user	0m1,902s
+sys	0m0,004s
+
+
+Con un numero de hilos de 4
+Con un kernel de 9
+
+real	0m0,958s
+user	0m3,441s
+sys	0m0,000s
+
+
+Con un numero de hilos de 8
+Con un kernel de 9
+
+real	0m1,026s
+user	0m3,529s
+sys	0m0,004s
+
+
+Con un numero de hilos de 16
+Con un kernel de 9
+
+real	0m1,072s
+user	0m3,806s
+sys	0m0,016s
+
+
+Con un numero de hilos de 2
+Con un kernel de 11
+
+real	0m1,269s
+user	0m2,401s
+sys	0m0,000s
+
+
+Con un numero de hilos de 4
+Con un kernel de 11
+
+real	0m1,190s
+user	0m4,296s
+sys	0m0,004s
+
+
+Con un numero de hilos de 8
+Con un kernel de 11
+
+real	0m1,215s
+user	0m4,406s
+sys	0m0,004s
+
+
+Con un numero de hilos de 16
+Con un kernel de 11
+
+real	0m1,271s
+user	0m4,643s
+sys	0m0,000s
+
+
+Con un numero de hilos de 2
+Con un kernel de 13
+
+real	0m1,456s
+user	0m2,778s
+sys	0m0,012s
+
+
+Con un numero de hilos de 4
+Con un kernel de 13
+
+real	0m1,380s
+user	0m5,072s
+sys	0m0,004s
+
+
+Con un numero de hilos de 8
+Con un kernel de 13
+
+real	0m1,385s
+user	0m5,116s
+sys	0m0,016s
+
+
+Con un numero de hilos de 16
+Con un kernel de 13
+
+real	0m1,460s
+user	0m5,412s
+sys	0m0,016s
+
+
+Con un numero de hilos de 2
+Con un kernel de 15
+
+real	0m1,679s
+user	0m3,224s
+sys	0m0,004s
+
+
+Con un numero de hilos de 4
+Con un kernel de 15
+
+real	0m1,563s
+user	0m5,761s
+sys	0m0,024s
+
+
+Con un numero de hilos de 8
+Con un kernel de 15
+
+real	0m1,588s
+user	0m5,918s
+sys	0m0,012s
+
+
+Con un numero de hilos de 16
+Con un kernel de 15
+
+real	0m1,652s
+user	0m6,161s
+sys	0m0,024s
+
+
+----------------------------------
+             imagen 4k            
+----------------------------------
+Con un numero de hilos de 2
+Con un kernel de 3
+
+real	0m6,393s
+user	0m10,810s
+sys	0m0,120s
+
+
+Con un numero de hilos de 4
+Con un kernel de 3
+
+real	0m6,378s
+user	0m19,651s
+sys	0m0,104s
+
+
+Con un numero de hilos de 8
+Con un kernel de 3
+
+real	0m6,863s
+user	0m21,608s
+sys	0m0,136s
+
+
+Con un numero de hilos de 16
+Con un kernel de 3
+
+real	0m7,766s
+user	0m25,179s
+sys	0m0,116s
+
+
+Con un numero de hilos de 2
+Con un kernel de 5
+
+real	0m9,164s
+user	0m16,407s
+sys	0m0,072s
+
+
+Con un numero de hilos de 4
+Con un kernel de 5
+
+real	0m8,978s
+user	0m29,908s
+sys	0m0,128s
+
+
+Con un numero de hilos de 8
+Con un kernel de 5
+
+real	0m9,431s
+user	0m31,835s
+sys	0m0,120s
+
+
+Con un numero de hilos de 16
+Con un kernel de 5
+
+real	0m10,381s
+user	0m35,543s
+sys	0m0,100s
+
+
+Con un numero de hilos de 2
+Con un kernel de 7
+
+real	0m12,176s
+user	0m22,399s
+sys	0m0,108s
+
+
+Con un numero de hilos de 4
+Con un kernel de 7
+
+real	0m11,907s
+user	0m41,464s
+sys	0m0,108s
+
+
+Con un numero de hilos de 8
+Con un kernel de 7
+
+real	0m12,447s
+user	0m43,684s
+sys	0m0,120s
+
+
+Con un numero de hilos de 16
+Con un kernel de 7
+
+real	0m13,376s
+user	0m47,311s
+sys	0m0,148s
+
+
+Con un numero de hilos de 2
+Con un kernel de 9
+
+real	0m15,165s
+user	0m28,325s
+sys	0m0,108s
+
+
+Con un numero de hilos de 4
+Con un kernel de 9
+
+real	0m15,295s
+user	0m52,957s
+sys	0m0,335s
+
+
+Con un numero de hilos de 8
+Con un kernel de 9
+
+real	0m15,467s
+user	0m55,527s
+sys	0m0,104s
+
+
+Con un numero de hilos de 16
+Con un kernel de 9
+
+real	0m16,579s
+user	0m59,904s
+sys	0m0,100s
+
+
+Con un numero de hilos de 2
+Con un kernel de 11
+
+real	0m18,970s
+user	0m35,942s
+sys	0m0,120s
+
+
+Con un numero de hilos de 4
+Con un kernel de 11
+
+real	0m18,495s
+user	1m7,591s
+sys	0m0,112s
+
+
+Con un numero de hilos de 8
+Con un kernel de 11
+
+real	0m18,563s
+user	1m8,052s
+sys	0m0,116s
+
+
+Con un numero de hilos de 16
+Con un kernel de 11
+
+real	0m19,460s
+user	1m11,549s
+sys	0m0,160s
+
+
+Con un numero de hilos de 2
+Con un kernel de 13
+
+real	0m22,121s
+user	0m42,098s
+sys	0m0,136s
+
+
+Con un numero de hilos de 4
+Con un kernel de 13
+
+real	0m22,279s
+user	1m18,900s
+sys	0m0,201s
+
+
+Con un numero de hilos de 8
+Con un kernel de 13
+
+real	0m22,025s
+user	1m21,520s
+sys	0m0,144s
+
+
+Con un numero de hilos de 16
+Con un kernel de 13
+
+real	0m23,019s
+user	1m25,617s
+sys	0m0,148s
+
+
+Con un numero de hilos de 2
+Con un kernel de 15
+
+real	0m25,551s
+user	0m49,012s
+sys	0m0,112s
+
+
+Con un numero de hilos de 4
+Con un kernel de 15
+
+real	0m25,143s
+user	1m31,782s
+sys	0m0,140s
+
+
+Con un numero de hilos de 8
+Con un kernel de 15
+
+real	0m25,544s
+user	1m35,550s
+sys	0m0,120s
+
+
+Con un numero de hilos de 16
+Con un kernel de 15
+
+real	0m27,873s
+user	1m43,937s
+sys	0m0,148s
+
+
