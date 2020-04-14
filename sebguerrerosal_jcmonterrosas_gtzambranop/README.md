@@ -3,7 +3,7 @@
 * Sebastian Guerrero Salinas - sebguerrerosal@unal.edu.co
 * Guiselle Tatiana Zambrano penagos - gtzambranop@unal.edu.co
 
-Ejecutar el archio blur_effect con el comando:
+Ejecutar el archio blur_effect.c con el comando:
 ```
 gcc -Wall blur_effect.c -o blur -lpthread -lm
 ```
