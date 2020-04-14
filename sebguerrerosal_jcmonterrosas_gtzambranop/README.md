@@ -3,8 +3,12 @@
 * Sebastian Guerrero Salinas - sebguerrerosal@unal.edu.co
 * Guiselle Tatiana Zambrano penagos - gtzambranop@unal.edu.co
 
-Ejecutar el archio blur_effect.c con el comando:
+Compilar el archio blur_effect.c con el comando:
 ```
 gcc -Wall blur_effect.c -o blur -lpthread -lm
-./blur lobo720p.jpg blurImagen.jpg 9 4
+```
+
+Ejecutar el porgrama con el comando:
+```
+./blur $ImagenEntrada $ImagenSalida $Kernel $Hilos
 ```
