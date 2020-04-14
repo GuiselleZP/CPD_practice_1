@@ -6,4 +6,5 @@
 Ejecutar el archio blur_effect.c con el comando:
 ```
 gcc -Wall blur_effect.c -o blur -lpthread -lm
+./blur lobo720p.jpg blurImagen.jpg 9 4
 ```
